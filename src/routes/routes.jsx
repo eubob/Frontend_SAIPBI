@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import Login from '../components/login';
-import Dashboard from '../components/dashboard';
+import Dashboard from '../components/dashboard/Dashboard';
 import PrivateRoute from './privateRoute';
 
 const router = createBrowserRouter([

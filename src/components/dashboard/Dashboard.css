@@ -1,0 +1,75 @@
+.dashboard-shell {
+  --db-navy-950: #0a1024;
+  --db-navy-900: #0d1533;
+  --db-blue-600: #1e4fd6;
+  --db-blue-500: #2f63e8;
+  --db-blue-400: #5b82f2;
+  --db-blue-100: #e8eefd;
+  --db-bg: #f4f6fb;
+  --db-white: #ffffff;
+  --db-text-900: #10142c;
+  --db-text-600: #5b6072;
+  --db-text-400: #9297a8;
+  --db-border: #e6e8f0;
+  --db-radius-lg: 16px;
+  --db-radius-md: 12px;
+  --db-radius-sm: 8px;
+  --db-shadow-card: 0 1px 2px rgba(16, 20, 44, 0.04),
+    0 8px 24px -12px rgba(16, 20, 44, 0.12);
+  --db-font: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  display: flex;
+  min-height: 100svh;
+  width: 100%;
+  background: var(--db-bg);
+  color: var(--db-text-900);
+  font-family: var(--db-font);
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 16, 36, 0.45);
+  z-index: 30;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 32px 40px 48px;
+  display: flex;
+}
+
+.dashboard-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--db-border);
+  border-radius: var(--db-radius-lg);
+  background: var(--db-white);
+  color: var(--db-text-400);
+  font-size: 14px;
+  font-weight: 500;
+  min-height: 400px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-content {
+    padding: 16px;
+  }
+}
