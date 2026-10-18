@@ -66,11 +66,7 @@ const menuItems = [
     icon: ChartNoAxesColumnIncreasing,
     path: '/app/desempenho-vendedor',
   },
-  {
-    label: 'RH',
-    icon: BriefcaseBusiness,
-    path: '/app/rh',
-  },
+  
 ];
 
 function Sidebar() {
