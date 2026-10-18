@@ -1,0 +1,1124 @@
+/* =========================
+   PÁGINAS DO SISTEMA
+========================= */
+
+.system-page {
+  width: 100%;
+}
+
+.page-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
+
+.primary-button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 15px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: linear-gradient(
+    135deg,
+    #1769e8,
+    #247cff
+  );
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  box-shadow: 0 4px 10px rgba(23, 105, 232, 0.18);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(23, 105, 232, 0.24);
+}
+
+
+/* =========================
+   BARRA DA TABELA
+========================= */
+
+.table-toolbar {
+  min-height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 12px 16px;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+.page-search {
+  width: 310px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 11px;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  color: #8b98aa;
+}
+
+.page-search:focus-within {
+  border-color: #5592ed;
+  box-shadow: 0 0 0 3px rgba(23, 105, 232, 0.07);
+}
+
+.page-search input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #344258;
+
+  font-size: 11px;
+}
+
+.page-search input::placeholder {
+  color: #a0abba;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+.toolbar-filters {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.toolbar-filters select,
+.date-filter {
+  height: 36px;
+
+  padding: 0 11px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  color: #536278;
+
+  font-size: 10px;
+}
+
+.toolbar-filters select:focus,
+.date-filter:focus {
+  border-color: #5592ed;
+}
+
+
+/* =========================
+   TABELA
+========================= */
+
+.page-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.page-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  color: #4a596e;
+
+  font-size: 11px;
+}
+
+.page-table thead {
+  background: #f5f7fa;
+}
+
+.page-table th {
+  padding: 11px 15px;
+
+  color: #44536a;
+
+  text-align: left;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.page-table td {
+  padding: 13px 15px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  vertical-align: middle;
+}
+
+.page-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.page-table tbody tr:hover {
+  background: #f9fbfe;
+}
+
+.page-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 9px;
+
+  border-radius: 12px;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.status-badge.success {
+  background: #e4f8e9;
+  color: #2da34a;
+}
+
+.status-badge.info {
+  background: #e7f0ff;
+  color: #1769e8;
+}
+
+.status-badge.warning {
+  background: #fff2d6;
+  color: #d78a00;
+}
+
+.status-badge.danger {
+  background: #ffe6e6;
+  color: #e24b4b;
+}
+
+
+/* =========================
+   AÇÕES
+========================= */
+
+.action-button {
+  width: 30px;
+  height: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e1e7ef;
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #64748b;
+}
+
+.action-button:hover {
+  background: #f2f6fb;
+  color: #1769e8;
+}
+
+/* =========================
+   CLIENTES
+========================= */
+
+.client-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 9px;
+
+  border-radius: 12px;
+
+  background: #e7f0ff;
+  color: #1769e8;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.page-table td strong {
+  color: #344258;
+  font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 800px) {
+  .table-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-search {
+    width: 100%;
+  }
+
+  .toolbar-filters {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .toolbar-filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar-filters select,
+  .date-filter {
+    width: 100%;
+  }
+}
+
+/* =========================
+   NOVA VENDA
+========================= */
+
+.sale-form-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+/* Etapas */
+
+.sale-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px 40px;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+.sale-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #9aa6b6;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.step-circle {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef2f7;
+  color: #8492a6;
+}
+
+.sale-step.active {
+  color: #1769e8;
+}
+
+.sale-step.active .step-circle {
+  background: #1769e8;
+  color: #ffffff;
+
+  box-shadow: 0 3px 8px rgba(23, 105, 232, 0.2);
+}
+
+.step-line {
+  width: 100px;
+  height: 1px;
+
+  margin: 0 16px;
+
+  background: #dfe6ef;
+}
+
+
+/* Conteúdo */
+
+.sale-form-content {
+  padding: 24px;
+}
+
+.sale-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+.sale-section-header h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sale-section-header p {
+  margin: 4px 0 0;
+
+  color: #8492a6;
+
+  font-size: 10px;
+}
+
+
+/* Busca de cliente */
+
+.sale-client-search {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 20px;
+  padding: 0 12px;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  color: #8c99aa;
+}
+
+.sale-client-search:focus-within {
+  border-color: #5592ed;
+
+  box-shadow:
+    0 0 0 3px rgba(23, 105, 232, 0.07);
+}
+
+.sale-client-search input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #344258;
+
+  font-size: 11px;
+}
+
+.sale-client-search input::placeholder {
+  color: #a0abba;
+}
+
+
+/* Campos */
+
+.sale-client-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 2fr)
+    minmax(130px, 1fr)
+    minmax(180px, 1.3fr)
+    minmax(160px, 1.2fr);
+
+  gap: 14px;
+}
+
+.form-group {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.form-group label {
+  color: #455469;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 38px;
+
+  padding: 0 11px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  color: #435269;
+
+  font-size: 10px;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #5592ed;
+
+  box-shadow:
+    0 0 0 3px rgba(23, 105, 232, 0.06);
+}
+
+.form-group input:disabled {
+  background: #f7f9fc;
+
+  color: #9ba6b5;
+
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder {
+  color: #adb6c3;
+}
+
+
+/* Rodapé */
+
+.sale-form-footer {
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  padding: 14px 24px;
+
+  background: #fafbfd;
+
+  border-top: 1px solid #edf1f5;
+}
+
+.secondary-button {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 17px;
+
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #536278;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  background: #f4f7fb;
+}
+
+
+/* Responsividade Nova Venda */
+
+@media (max-width: 1000px) {
+  .sale-client-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .step-line {
+    width: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sale-steps {
+    justify-content: flex-start;
+
+    padding: 18px;
+
+    overflow-x: auto;
+  }
+
+  .step-line {
+    min-width: 30px;
+
+    margin: 0 8px;
+  }
+
+  .sale-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sale-client-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sale-form-content {
+    padding: 18px;
+  }
+
+  .sale-form-footer {
+    padding: 14px 18px;
+  }
+}
+
+/* =========================
+   RELATÓRIOS
+========================= */
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 900px;
+}
+
+.report-card {
+  min-height: 170px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #d3e0f3;
+
+  box-shadow:
+    0 7px 20px rgba(27, 55, 90, 0.07);
+}
+
+.report-icon {
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #e8f1ff;
+  color: #1769e8;
+}
+
+.report-info {
+  min-width: 0;
+}
+
+.report-info h2 {
+  margin: 2px 0 6px;
+
+  color: #172033;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.report-info p {
+  min-height: 34px;
+
+  margin: 0 0 17px;
+
+  color: #7d8ba1;
+
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.report-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 7px 11px;
+
+  border: 0;
+  border-radius: 5px;
+
+  background: #e8f1ff;
+  color: #1769e8;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.report-link:hover:not(:disabled) {
+  background: #1769e8;
+  color: #ffffff;
+}
+
+.report-link:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 750px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
+}
+
+/* =========================
+   VENDAS POR PERÍODO
+========================= */
+
+.report-filter-card {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+
+  margin-bottom: 16px;
+  padding: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+}
+
+.report-date-field {
+  width: 190px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.report-date-field label {
+  color: #66758a;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.report-date-input {
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 10px;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #7d8ba0;
+}
+
+.report-date-input input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #435269;
+
+  font-size: 10px;
+}
+
+.report-date-input input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 0;
+}
+
+.report-generate-button {
+  height: 38px;
+}
+
+
+/* Indicadores */
+
+.report-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 16px;
+}
+
+.report-summary-card {
+  min-height: 82px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+}
+
+.report-summary-card span {
+  margin-bottom: 7px;
+
+  color: #7c899d;
+
+  font-size: 10px;
+}
+
+.report-summary-card strong {
+  color: #172033;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+/* Gráfico */
+
+.report-chart-card {
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+}
+
+.report-chart-header {
+  margin-bottom: 18px;
+}
+
+.report-chart-header h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.report-chart-header p {
+  margin: 4px 0 0;
+
+  color: #8492a6;
+
+  font-size: 10px;
+}
+
+.report-chart {
+  width: 100%;
+  height: 330px;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 900px) {
+  .report-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .report-filter-card {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .report-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-date-field {
+    width: 100%;
+  }
+
+  .report-generate-button {
+    width: 100%;
+  }
+
+  .report-chart {
+    height: 280px;
+  }
+}
+
+/* =========================
+   DESEMPENHO POR VENDEDOR
+========================= */
+
+.seller-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+
+  margin-bottom: 16px;
+}
+
+.seller-chart {
+  width: 100%;
+  height: 350px;
+}
+
+@media (max-width: 800px) {
+  .seller-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seller-chart {
+    height: 300px;
+  }
+}
+
+/* =========================
+   RH - RECURSOS HUMANOS
+========================= */
+
+.rh-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.rh-summary-card {
+  min-height: 86px;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+}
+
+.rh-summary-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.rh-summary-icon.blue {
+  background: #e8f1ff;
+  color: #1769e8;
+}
+
+.rh-summary-icon.orange {
+  background: #fff2dc;
+  color: #f59e0b;
+}
+
+.rh-summary-icon.green {
+  background: #e5f8eb;
+  color: #22a447;
+}
+
+.rh-summary-icon.red {
+  background: #ffe9e9;
+  color: #ef4444;
+}
+
+.rh-summary-card div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.rh-summary-card span {
+  margin-bottom: 4px;
+
+  color: #7c899d;
+
+  font-size: 10px;
+}
+
+.rh-summary-card strong {
+  color: #172033;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+
+/* Abas */
+
+.rh-table-tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  padding: 0 16px;
+
+  border-bottom: 1px solid #e8edf4;
+}
+
+.rh-tab {
+  position: relative;
+
+  padding: 15px 2px 13px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #7b889b;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.rh-tab:hover {
+  color: #1769e8;
+}
+
+.rh-tab.active {
+  color: #1769e8;
+}
+
+.rh-tab.active::after {
+  content: '';
+
+  position: absolute;
+
+  right: 0;
+  bottom: -1px;
+  left: 0;
+
+  height: 2px;
+
+  border-radius: 2px;
+
+  background: #1769e8;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 1000px) {
+  .rh-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .rh-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rh-table-tabs {
+    gap: 15px;
+    overflow-x: auto;
+  }
+
+  .rh-tab {
+    white-space: nowrap;
+  }
+}
