@@ -14,7 +14,7 @@ import Produtos from '../pages/Produtos';
 import Relatorios from '../pages/relatorios/Relatorios';
 import VendasPeriodo from '../pages/relatorios/VendasPeriodo';
 import DesempenhoVendedor from '../pages/relatorios/DesempenhoVendedor';
-import RH from '../pages/RH';
+
 
 import AppLayout from '../components/layout/AppLayout';
 import PrivateRoute from './privateRoute';
@@ -77,10 +77,7 @@ const router = createBrowserRouter([
             path: 'desempenho-vendedor',
             element: <DesempenhoVendedor />,
           },
-          {
-            path: 'rh',
-            element: <RH />,
-          },
+
         ],
       },
     ],
