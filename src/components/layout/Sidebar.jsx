@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   ShoppingCart,
@@ -10,63 +10,67 @@ import {
   BarChart3,
   CalendarDays,
   ChartNoAxesColumnIncreasing,
-  BriefcaseBusiness,
   Settings,
-} from 'lucide-react';
+  UserCog,
+} from "lucide-react";
 
 const menuItems = [
   {
-    label: 'Dashboard',
+    label: "Dashboard",
     icon: LayoutDashboard,
-    path: '/app',
+    path: "/app",
     end: true,
   },
   {
-    label: 'Vendas',
+    label: "Vendas",
     icon: ShoppingCart,
-    path: '/app/vendas',
+    path: "/app/vendas",
   },
   {
-    label: 'Clientes',
+    label: "Clientes",
     icon: Users,
-    path: '/app/clientes',
+    path: "/app/clientes",
   },
   {
-    label: 'Vendedores',
+    label: "Vendedores",
     icon: UserRound,
-    path: '/app/vendedores',
+    path: "/app/vendedores",
   },
   {
-    label: 'Nova Venda',
+    label: "Nova Venda",
     icon: CirclePlus,
-    path: '/app/nova-venda',
+    path: "/app/nova-venda",
   },
   {
-    label: 'Pedidos',
+    label: "Pedidos",
     icon: ClipboardList,
-    path: '/app/pedidos',
+    path: "/app/pedidos",
   },
   {
-    label: 'Produtos',
+    label: "Produtos",
     icon: Package,
-    path: '/app/produtos',
+    path: "/app/produtos",
   },
   {
-    label: 'Relatórios',
+    label: "Usuários",
+    icon: UserCog,
+    path: "/app/usuarios",
+  },
+  {
+    label: "Relatórios",
     icon: BarChart3,
-    path: '/app/relatorios',
+    path: "/app/relatorios",
   },
   {
-    label: 'Vendas por Período',
+    label: "Vendas por Período",
     icon: CalendarDays,
-    path: '/app/vendas-periodo',
+    path: "/app/vendas-periodo",
   },
   {
-    label: 'Desempenho por Vendedor',
+    label: "Desempenho por Vendedor",
     icon: ChartNoAxesColumnIncreasing,
-    path: '/app/desempenho-vendedor',
+    path: "/app/desempenho-vendedor",
   },
-  
 ];
 
 function Sidebar() {
@@ -93,7 +97,7 @@ function Sidebar() {
               to={item.path}
               end={item.end}
               className={({ isActive }) =>
-                `sidebar-link ${isActive ? 'active' : ''}`
+                `sidebar-link ${isActive ? "active" : ""}`
               }
             >
               <Icon size={18} strokeWidth={1.8} />
@@ -107,7 +111,7 @@ function Sidebar() {
         <NavLink
           to="/app/configuracoes"
           className={({ isActive }) =>
-            `sidebar-link ${isActive ? 'active' : ''}`
+            `sidebar-link ${isActive ? "active" : ""}`
           }
         >
           <Settings size={18} strokeWidth={1.8} />
