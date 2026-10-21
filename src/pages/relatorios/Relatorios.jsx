@@ -16,14 +16,14 @@ const relatorios = [
     titulo: 'Vendas por Período',
     descricao: 'Analise suas vendas em um período específico.',
     icon: CalendarDays,
-    rota: '/app/vendas-periodo',
+    rota: '/app/comercial/relatorios/vendas-periodo',
   },
   {
     id: 'desempenho-vendedor',
     titulo: 'Desempenho por Vendedor',
     descricao: 'Compare o desempenho da sua equipe.',
     icon: Users,
-    rota: '/app/desempenho-vendedor',
+    rota: '/app/comercial/relatorios/desempenho-vendedor',
   },
   {
     id: 'produtos-vendidos',
@@ -37,7 +37,7 @@ const relatorios = [
     titulo: 'Clientes',
     descricao: 'Analise o comportamento dos seus clientes.',
     icon: UserRound,
-    rota: '/app/clientes',
+    rota: '/app/comercial/clientes',
   },
 ];
 
@@ -97,4 +97,4 @@ function Relatorios() {
   );
 }
 
-export default Relatorios;
+export default Relatorios; 

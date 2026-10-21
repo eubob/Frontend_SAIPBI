@@ -966,3 +966,293 @@
   }
 }
 
+/* =========================
+   DASHBOARDS DOS MÓDULOS
+========================= */
+
+.module-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.module-metric-card {
+  min-height: 105px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4eaf2;
+  border-radius: 9px;
+}
+
+.module-metric-card > div:last-child {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.module-metric-card span {
+  color: #6e7c91;
+  font-size: 10px;
+}
+
+.module-metric-card strong {
+  margin-top: 4px;
+
+  color: #172033;
+
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.module-metric-card small {
+  margin-top: 5px;
+
+  color: #8a98aa;
+
+  font-size: 9px;
+}
+
+.module-metric-icon {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+}
+
+.module-metric-icon.blue {
+  color: #1769e8;
+  background: #e8f1ff;
+}
+
+.module-metric-icon.green {
+  color: #2da34a;
+  background: #e4f8e9;
+}
+
+.module-metric-icon.orange {
+  color: #d78a00;
+  background: #fff2d6;
+}
+
+.module-metric-icon.red {
+  color: #e24b4b;
+  background: #ffe6e6;
+}
+
+
+/* =========================
+   GRID DOS DASHBOARDS
+========================= */
+
+.module-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.8fr);
+
+  gap: 16px;
+
+  margin-bottom: 16px;
+}
+
+.module-chart-card {
+  min-height: 330px;
+}
+
+.module-card-heading {
+  min-height: 67px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 14px 17px;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+.module-card-heading h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.module-card-heading p {
+  margin: 4px 0 0;
+
+  color: #7d8ba1;
+
+  font-size: 9px;
+}
+
+.module-card-heading select {
+  height: 32px;
+
+  padding: 0 10px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+
+  color: #536278;
+
+  font-size: 10px;
+}
+
+.module-chart {
+  width: 100%;
+  height: 250px;
+
+  padding: 18px 16px 10px 4px;
+}
+
+
+/* =========================
+   ALERTAS DO ESTOQUE
+========================= */
+
+.stock-alert-list {
+  padding: 5px 17px 15px;
+}
+
+.stock-alert-item {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+.stock-alert-item:last-child {
+  border-bottom: 0;
+}
+
+.stock-alert-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.stock-alert-icon.warning {
+  background: #fff2d6;
+  color: #d78a00;
+}
+
+.stock-alert-icon.danger {
+  background: #ffe6e6;
+  color: #e24b4b;
+}
+
+.stock-alert-icon.success {
+  background: #e4f8e9;
+  color: #2da34a;
+}
+
+.stock-alert-icon.info {
+  background: #e7f0ff;
+  color: #1769e8;
+}
+
+.stock-alert-item > div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-alert-item strong {
+  color: #344258;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.stock-alert-item span {
+  margin-top: 3px;
+
+  color: #8290a3;
+
+  font-size: 9px;
+}
+
+
+/* =========================
+   MOVIMENTAÇÕES
+========================= */
+
+.movement-type {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.movement-type.entry {
+  color: #2da34a;
+}
+
+.movement-type.exit {
+  color: #e24b4b;
+}
+
+
+/* =========================
+   RESPONSIVIDADE DOS MÓDULOS
+========================= */
+
+@media (max-width: 1150px) {
+  .module-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .module-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .module-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .module-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+} 
+

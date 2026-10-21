@@ -1,92 +1,404 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+} from 'react-router-dom';
 
-import Login from "../components/login";
-import Usuarios from "../pages/Usuarios";
-import Dashboard from "../components/dashboard/Dashboard";
-import Vendas from "../pages/Vendas";
-import Vendedores from "../pages/Vendedores";
-import Clientes from "../pages/Clientes";
-import NovaVenda from "../pages/NovaVenda";
-import Pedidos from "../pages/Pedidos";
-import Produtos from "../pages/Produtos";
-import Relatorios from "../pages/relatorios/Relatorios";
-import VendasPeriodo from "../pages/relatorios/VendasPeriodo";
-import DesempenhoVendedor from "../pages/relatorios/DesempenhoVendedor";
+import Login from '../components/login';
 
-import AppLayout from "../components/layout/AppLayout";
-import PrivateRoute from "./privateRoute";
+import Modulos from '../pages/Modulos';
+
+import Dashboard from '../components/dashboard/Dashboard';
+
+// =========================
+// COMERCIAL
+// =========================
+
+import Vendas from '../pages/Vendas';
+import Vendedores from '../pages/Vendedores';
+import Clientes from '../pages/Clientes';
+import NovaVenda from '../pages/NovaVenda';
+import Pedidos from '../pages/Pedidos';
+import Produtos from '../pages/Produtos';
+
+import Relatorios from '../pages/relatorios/Relatorios';
+import VendasPeriodo from '../pages/relatorios/VendasPeriodo';
+import DesempenhoVendedor from '../pages/relatorios/DesempenhoVendedor';
+
+// =========================
+// ESTOQUE
+// =========================
+
+import DashboardEstoque from '../pages/estoque/DashboardEstoque';
+import ControleEstoque from '../pages/estoque/ControleEstoque';
+import Entradas from '../pages/estoque/Entradas';
+import Saidas from '../pages/estoque/Saidas';
+import Movimentacoes from '../pages/estoque/Movimentacoes';
+import Inventario from '../pages/estoque/Inventario';
+import Fornecedores from '../pages/estoque/Fornecedores';
+
+// =========================
+// FINANCEIRO
+// =========================
+
+import DashboardFinanceiro from '../pages/financeiro/DashboardFinanceiro';
+import ContasPagar from '../pages/financeiro/ContasPagar';
+import ContasReceber from '../pages/financeiro/ContasReceber';
+import FluxoCaixa from '../pages/financeiro/FluxoCaixa';
+import Lancamentos from '../pages/financeiro/Lancamentos';
+import RelatoriosFinanceiros from '../pages/financeiro/RelatoriosFinanceiros';
+
+// =========================
+// LAYOUT / SEGURANÇA
+// =========================
+
+import AppLayout from '../components/layout/AppLayout';
+import PrivateRoute from './privateRoute';
 
 const router = createBrowserRouter([
+  // =========================
+  // LOGIN
+  // =========================
+
   {
-    path: "/",
+    path: '/',
     element: <Navigate to="/login" replace />,
   },
 
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
 
+  // =========================
+  // ÁREA AUTENTICADA
+  // =========================
+
   {
-    path: "/app",
+    path: '/app',
     element: <PrivateRoute />,
+
     children: [
+      // =========================
+      // PORTAL DE MÓDULOS
+      // =========================
+
+      {
+        index: true,
+        element: <Modulos />,
+      },
+
+      // =========================
+      // ÁREA COM SIDEBAR
+      // =========================
+
       {
         element: <AppLayout />,
+
         children: [
+          // =========================
+          // COMERCIAL
+          // =========================
+
           {
-            index: true,
+            path: 'comercial',
             element: <Dashboard />,
           },
+
           {
-            path: "vendas",
+            path: 'comercial/vendas',
             element: <Vendas />,
           },
+
           {
-            path: "clientes",
-            element: <Clientes />,
-          },
-          {
-            path: "usuarios",
-            element: <Usuarios />,
-          },
-          {
-            path: "vendedores",
-            element: <Vendedores />,
-          },
-          {
-            path: "nova-venda",
+            path: 'comercial/nova-venda',
             element: <NovaVenda />,
           },
+
           {
-            path: "pedidos",
+            path: 'comercial/clientes',
+            element: <Clientes />,
+          },
+
+          {
+            path: 'comercial/vendedores',
+            element: <Vendedores />,
+          },
+
+          {
+            path: 'comercial/pedidos',
             element: <Pedidos />,
           },
+
           {
-            path: "produtos",
+            path: 'comercial/produtos',
             element: <Produtos />,
           },
+
           {
-            path: "relatorios",
+            path: 'comercial/relatorios',
             element: <Relatorios />,
           },
+
           {
-            path: "vendas-periodo",
+            path: 'comercial/relatorios/vendas-periodo',
             element: <VendasPeriodo />,
           },
+
           {
-            path: "desempenho-vendedor",
+            path: 'comercial/relatorios/desempenho-vendedor',
             element: <DesempenhoVendedor />,
+          },
+
+          // =========================
+          // ESTOQUE
+          // =========================
+
+          {
+            path: 'estoque',
+            element: <DashboardEstoque />,
+          },
+
+          {
+            path: 'estoque/produtos',
+            element: <Produtos />,
+          },
+
+          {
+            path: 'estoque/controle',
+            element: <ControleEstoque />,
+          },
+
+          {
+            path: 'estoque/entradas',
+            element: <Entradas />,
+          },
+
+          {
+            path: 'estoque/saidas',
+            element: <Saidas />,
+          },
+
+          {
+            path: 'estoque/movimentacoes',
+            element: <Movimentacoes />,
+          },
+
+          {
+            path: 'estoque/inventario',
+            element: <Inventario />,
+          },
+
+          {
+            path: 'estoque/fornecedores',
+            element: <Fornecedores />,
+          },
+
+          // =========================
+          // FINANCEIRO
+          // =========================
+
+          {
+            path: 'financeiro',
+            element: <DashboardFinanceiro />,
+          },
+
+          {
+            path: 'financeiro/contas-pagar',
+            element: <ContasPagar />,
+          },
+
+          {
+            path: 'financeiro/contas-receber',
+            element: <ContasReceber />,
+          },
+
+          {
+            path: 'financeiro/fluxo-caixa',
+            element: <FluxoCaixa />,
+          },
+
+          {
+            path: 'financeiro/lancamentos',
+            element: <Lancamentos />,
+          },
+
+          {
+            path: 'financeiro/relatorios',
+            element: <RelatoriosFinanceiros />,
+          },
+
+          // =========================
+          // ROTAS ANTIGAS
+          // COMERCIAL
+          // =========================
+
+          {
+            path: 'vendas',
+            element: (
+              <Navigate
+                to="/app/comercial/vendas"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'clientes',
+            element: (
+              <Navigate
+                to="/app/comercial/clientes"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'vendedores',
+            element: (
+              <Navigate
+                to="/app/comercial/vendedores"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'nova-venda',
+            element: (
+              <Navigate
+                to="/app/comercial/nova-venda"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'pedidos',
+            element: (
+              <Navigate
+                to="/app/comercial/pedidos"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'produtos',
+            element: (
+              <Navigate
+                to="/app/comercial/produtos"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'relatorios',
+            element: (
+              <Navigate
+                to="/app/comercial/relatorios"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'vendas-periodo',
+            element: (
+              <Navigate
+                to="/app/comercial/relatorios/vendas-periodo"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'desempenho-vendedor',
+            element: (
+              <Navigate
+                to="/app/comercial/relatorios/desempenho-vendedor"
+                replace
+              />
+            ),
+          },
+
+          // =========================
+          // ROTAS ANTIGAS
+          // ESTOQUE
+          // =========================
+
+          {
+            path: 'controle-estoque',
+            element: (
+              <Navigate
+                to="/app/estoque/controle"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'entradas',
+            element: (
+              <Navigate
+                to="/app/estoque/entradas"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'saidas',
+            element: (
+              <Navigate
+                to="/app/estoque/saidas"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'movimentacoes',
+            element: (
+              <Navigate
+                to="/app/estoque/movimentacoes"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'inventario',
+            element: (
+              <Navigate
+                to="/app/estoque/inventario"
+                replace
+              />
+            ),
+          },
+
+          {
+            path: 'fornecedores',
+            element: (
+              <Navigate
+                to="/app/estoque/fornecedores"
+                replace
+              />
+            ),
           },
         ],
       },
     ],
   },
 
+  // =========================
+  // ROTA NÃO ENCONTRADA
+  // =========================
+
   {
-    path: "*",
+    path: '*',
     element: <Navigate to="/login" replace />,
   },
 ]);
 
-export default router;
+export default router; 
