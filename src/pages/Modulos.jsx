@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+
 import {
   ShoppingCart,
   Boxes,
@@ -29,15 +30,15 @@ const modulos = [
     path: '/app/estoque',
     status: 'Disponível',
   },
- {
-  id: 'financeiro',
-  titulo: 'Financeiro',
-  descricao:
-    'Acompanhe contas, fluxo de caixa, lançamentos e indicadores financeiros.',
-  icon: WalletCards,
-  path: '/app/financeiro',
-  status: 'Disponível',
-},
+  {
+    id: 'financeiro',
+    titulo: 'Financeiro',
+    descricao:
+      'Acompanhe contas, fluxo de caixa, lançamentos e indicadores financeiros.',
+    icon: WalletCards,
+    path: '/app/financeiro',
+    status: 'Disponível',
+  },
   {
     id: 'rh',
     titulo: 'Recursos Humanos',
@@ -45,8 +46,7 @@ const modulos = [
       'Gerencie colaboradores, departamentos, cargos e indicadores de RH.',
     icon: UsersRound,
     path: '/app/rh',
-    status: 'Em desenvolvimento',
-    disabled: true,
+    status: 'Disponível',
   },
 ];
 
@@ -78,7 +78,9 @@ function Modulos() {
 
         <div className="modules-user-area">
           <div className="modules-user">
-            <div className="modules-avatar">HC</div>
+            <div className="modules-avatar">
+              HC
+            </div>
 
             <div>
               <strong>Hygor Custodio</strong>
@@ -98,7 +100,9 @@ function Modulos() {
 
       <main className="modules-content">
         <div className="modules-intro">
-          <span className="modules-eyebrow">PAINEL ADMINISTRATIVO</span>
+          <span className="modules-eyebrow">
+            PAINEL ADMINISTRATIVO
+          </span>
 
           <h1>Selecione um módulo</h1>
 
@@ -124,12 +128,17 @@ function Modulos() {
               >
                 <div className="module-selection-top">
                   <div className="module-selection-icon">
-                    <Icon size={25} strokeWidth={1.8} />
+                    <Icon
+                      size={25}
+                      strokeWidth={1.8}
+                    />
                   </div>
 
                   <span
                     className={`module-status ${
-                      modulo.disabled ? 'development' : 'available'
+                      modulo.disabled
+                        ? 'development'
+                        : 'available'
                     }`}
                   >
                     {modulo.status}
@@ -143,10 +152,14 @@ function Modulos() {
 
                 <div className="module-selection-footer">
                   <span>
-                    {modulo.disabled ? 'Em breve' : 'Acessar módulo'}
+                    {modulo.disabled
+                      ? 'Em breve'
+                      : 'Acessar módulo'}
                   </span>
 
-                  {!modulo.disabled && <ArrowRight size={17} />}
+                  {!modulo.disabled && (
+                    <ArrowRight size={17} />
+                  )}
                 </div>
               </button>
             );
@@ -156,11 +169,13 @@ function Modulos() {
         <div className="modules-footer-info">
           <span>SAIPBI</span>
           <span className="modules-dot" />
-          <span>Sistema Administrativo Integrado com Power BI</span>
+          <span>
+            Sistema Administrativo Integrado
+          </span>
         </div>
       </main>
     </div>
   );
 }
 
-export default Modulos; 
+export default Modulos;  

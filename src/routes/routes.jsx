@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 
 import Login from '../components/login';
-
 import Modulos from '../pages/Modulos';
 
 import Dashboard from '../components/dashboard/Dashboard';
@@ -46,6 +45,17 @@ import ContasReceber from '../pages/financeiro/ContasReceber';
 import FluxoCaixa from '../pages/financeiro/FluxoCaixa';
 import Lancamentos from '../pages/financeiro/Lancamentos';
 import RelatoriosFinanceiros from '../pages/financeiro/RelatoriosFinanceiros';
+
+// =========================
+// RECURSOS HUMANOS
+// =========================
+
+import DashboardRH from '../pages/rh/DashboardRH';
+import Colaboradores from '../pages/rh/Colaboradores';
+import Departamentos from '../pages/rh/Departamentos';
+import Cargos from '../pages/rh/Cargos';
+import ControlePessoal from '../pages/rh/ControlePessoal';
+import RelatoriosRH from '../pages/rh/RelatoriosRH';
 
 // =========================
 // LAYOUT / SEGURANÇA
@@ -228,6 +238,40 @@ const router = createBrowserRouter([
           },
 
           // =========================
+          // RECURSOS HUMANOS
+          // =========================
+
+          {
+            path: 'rh',
+            element: <DashboardRH />,
+          },
+
+          {
+            path: 'rh/colaboradores',
+            element: <Colaboradores />,
+          },
+
+          {
+            path: 'rh/departamentos',
+            element: <Departamentos />,
+          },
+
+          {
+            path: 'rh/cargos',
+            element: <Cargos />,
+          },
+
+          {
+            path: 'rh/controle-pessoal',
+            element: <ControlePessoal />,
+          },
+
+          {
+            path: 'rh/relatorios',
+            element: <RelatoriosRH />,
+          },
+
+          // =========================
           // ROTAS ANTIGAS
           // COMERCIAL
           // =========================
@@ -401,4 +445,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router; 
+export default router;  
