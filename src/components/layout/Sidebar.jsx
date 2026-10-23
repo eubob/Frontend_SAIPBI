@@ -21,6 +21,9 @@ import {
   TrendingUp,
   Landmark,
   ReceiptText,
+  Building2,
+  BriefcaseBusiness,
+  UserCog,
 } from 'lucide-react';
 
 /* =========================
@@ -158,6 +161,44 @@ const financeiroItems = [
 ];
 
 /* =========================
+   RECURSOS HUMANOS
+========================= */
+
+const rhItems = [
+  {
+    label: 'Visão Geral',
+    icon: LayoutDashboard,
+    path: '/app/rh',
+    end: true,
+  },
+  {
+    label: 'Colaboradores',
+    icon: Users,
+    path: '/app/rh/colaboradores',
+  },
+  {
+    label: 'Departamentos',
+    icon: Building2,
+    path: '/app/rh/departamentos',
+  },
+  {
+    label: 'Cargos',
+    icon: BriefcaseBusiness,
+    path: '/app/rh/cargos',
+  },
+  {
+    label: 'Controle de Pessoal',
+    icon: UserCog,
+    path: '/app/rh/controle-pessoal',
+  },
+  {
+    label: 'Relatórios',
+    icon: BarChart3,
+    path: '/app/rh/relatorios',
+  },
+];
+
+/* =========================
    SIDEBAR
 ========================= */
 
@@ -170,9 +211,18 @@ function Sidebar() {
   const isFinanceiro =
     location.pathname.startsWith('/app/financeiro');
 
+  const isRH =
+    location.pathname.startsWith('/app/rh');
+
   let modulo;
 
-  if (isFinanceiro) {
+  if (isRH) {
+    modulo = {
+      nome: 'RECURSOS HUMANOS',
+      descricao: 'Gestão de Pessoas',
+      items: rhItems,
+    };
+  } else if (isFinanceiro) {
     modulo = {
       nome: 'FINANCEIRO',
       descricao: 'Gestão Financeira',
