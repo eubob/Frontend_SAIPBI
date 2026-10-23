@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/AxiosInstance';
 import './login.css';
 
 export default function Login() {
@@ -18,35 +19,25 @@ const handleLogin = async (e) => {
   setLoading(true);
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        senha: password,
-      }),
+    const response = await api.post('/auth/login', {
+      email,
+      senha: password,
     });
 
-    const data = await response.json();
+    const { token } = response.data;
 
-    if (response.ok) {
-      const storage = remember ? localStorage : sessionStorage;
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
 
-      storage.setItem('token', data.token);
+    const storage = remember ? localStorage : sessionStorage;
+    storage.setItem('token', token);
 
-      navigate('/app');
-    } else {
-      setError(
-        data.error || 'E-mail ou senha inválidos. Tente novamente.'
-      );
-    }
-  } catch (err) {
-    console.error('Erro ao realizar login:', err);
-
+    navigate('/app', { replace: true });
+  } catch (error) {
+    console.error('Erro ao realizar login:', error);
     setError(
-      'Não foi possível conectar ao servidor. Verifique sua conexão.'
+      error.response?.data?.mensagem ||
+        'Não foi possível realizar o login.'
     );
   } finally {
     setLoading(false);
