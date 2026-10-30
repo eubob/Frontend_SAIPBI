@@ -513,3 +513,26 @@
 
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+/* =========================
+   CONTEXTO MULTI-TENANT
+========================= */
+.topbar-company {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 16px;
+  margin-right: 4px;
+  border-right: 1px solid #e2e8f0;
+}
+.topbar-company strong {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+}
+.topbar-company span { margin-top: 2px; color: #94a3b8; font-size: 11px; }
+.topbar-logout { margin-left: 4px; }
+@media (max-width: 900px) { .topbar-company { display: none; } }

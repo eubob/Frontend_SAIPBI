@@ -63,6 +63,8 @@ import RelatoriosRH from '../pages/rh/RelatoriosRH';
 
 import AppLayout from '../components/layout/AppLayout';
 import PrivateRoute from './privateRoute';
+import AdminRoute from './AdminRoute';
+import Parametros from '../pages/configuracoes/Parametros';
 
 const router = createBrowserRouter([
   // =========================
@@ -269,6 +271,20 @@ const router = createBrowserRouter([
           {
             path: 'rh/relatorios',
             element: <RelatoriosRH />,
+          },
+
+          // =========================
+          // CONFIGURAÇÕES / ADMINISTRAÇÃO
+          // =========================
+
+          {
+            element: <AdminRoute />,
+            children: [
+              {
+                path: 'configuracoes',
+                element: <Parametros />,
+              },
+            ],
           },
 
           // =========================

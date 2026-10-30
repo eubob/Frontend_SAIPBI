@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/AxiosInstance';
+import useAuth from '../hooks/useAuth';
 import './login.css';
 
 export default function Login() {
@@ -11,6 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { carregarSessao } = useAuth();
 
 const handleLogin = async (e) => {
   e.preventDefault();
@@ -31,6 +33,12 @@ const handleLogin = async (e) => {
 
     const storage = remember ? localStorage : sessionStorage;
     storage.setItem('token', token);
+
+    const sessaoValida = await carregarSessao();
+
+    if (!sessaoValida) {
+      throw new Error('Não foi possível carregar a sessão do usuário.');
+    }
 
     navigate('/app', { replace: true });
   } catch (error) {

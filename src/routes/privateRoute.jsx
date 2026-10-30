@@ -1,14 +1,17 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 export default function PrivateRoute() {
-  const token =
-    localStorage.getItem('token') ||
-    sessionStorage.getItem('token');
+  const { authenticated, loading } = useAuth();
+  const location = useLocation();
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
+  if (loading) {
+    return <div className="session-loading">Carregando sessão...</div>;
+  }
+
+  if (!authenticated) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
   return <Outlet />;
 }
-

@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 import {
   LayoutDashboard,
@@ -204,6 +205,7 @@ const rhItems = [
 
 function Sidebar() {
   const location = useLocation();
+  const { isAdministrador } = useAuth();
 
   const isEstoque =
     location.pathname.startsWith('/app/estoque');
@@ -310,21 +312,17 @@ function Sidebar() {
           <span>Trocar módulo</span>
         </NavLink>
 
-        <NavLink
-          to="/app/configuracoes"
-          className={({ isActive }) =>
-            `sidebar-link ${
-              isActive ? 'active' : ''
-            }`
-          }
-        >
-          <Settings
-            size={18}
-            strokeWidth={1.8}
-          />
-
-          <span>Configurações</span>
-        </NavLink>
+        {isAdministrador && (
+          <NavLink
+            to="/app/configuracoes"
+            className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }
+          >
+            <Settings size={18} strokeWidth={1.8} />
+            <span>Configurações</span>
+          </NavLink>
+        )}
       </div>
     </aside>
   );
