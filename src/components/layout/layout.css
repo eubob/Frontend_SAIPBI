@@ -19,7 +19,6 @@
   padding: 28px;
 }
 
-
 /* =========================
    SIDEBAR
 ========================= */
@@ -38,13 +37,7 @@
 
   padding: 22px 14px;
 
-  background:
-    linear-gradient(
-      180deg,
-      #0b2b59 0%,
-      #081f41 55%,
-      #071a35 100%
-    );
+  background: linear-gradient(180deg, #0b2b59 0%, #081f41 55%, #071a35 100%);
 
   color: #ffffff;
 
@@ -81,11 +74,7 @@
 
   border-radius: 2px;
 
-  background: linear-gradient(
-    180deg,
-    #4195ff,
-    #1263eb
-  );
+  background: linear-gradient(180deg, #4195ff, #1263eb);
 }
 
 .sidebar-logo-bars span:nth-child(1) {
@@ -171,11 +160,7 @@
 .sidebar-link.active {
   color: #ffffff;
 
-  background: linear-gradient(
-    90deg,
-    #1166f4,
-    #2378ff
-  );
+  background: linear-gradient(90deg, #1166f4, #2378ff);
 
   box-shadow: 0 5px 14px rgba(0, 86, 255, 0.22);
 }
@@ -185,7 +170,6 @@
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 
 /* =========================
    TOPBAR
@@ -226,7 +210,6 @@
   gap: 12px;
 }
 
-
 /* BOTÃO MENU */
 
 .topbar-menu-button,
@@ -255,7 +238,6 @@
 .topbar-menu-button:hover {
   background: #f0f4fa;
 }
-
 
 /* =========================
    PESQUISA
@@ -301,7 +283,6 @@
   color: #9ba8ba;
 }
 
-
 /* =========================
    NOTIFICAÇÃO
 ========================= */
@@ -335,7 +316,6 @@
   border: 2px solid #ffffff;
 }
 
-
 /* =========================
    USUÁRIO
 ========================= */
@@ -350,11 +330,7 @@
 
   border-radius: 50%;
 
-  background: linear-gradient(
-    135deg,
-    #1268f3,
-    #0051d4
-  );
+  background: linear-gradient(135deg, #1268f3, #0051d4);
 
   color: #ffffff;
 
@@ -387,7 +363,6 @@
 
   font-size: 10px;
 }
-
 
 /* =========================
    RESPONSIVIDADE
@@ -437,7 +412,7 @@
   .topbar-search {
     display: none;
   }
-} 
+}
 
 /* =========================
    GRUPOS DA SIDEBAR
@@ -463,7 +438,7 @@
 
 .sidebar-nav {
   padding-right: 3px;
-} 
+}
 
 /* =========================
    IDENTIFICAÇÃO DO MÓDULO
@@ -533,6 +508,60 @@
   font-size: 13px;
   font-weight: 600;
 }
-.topbar-company span { margin-top: 2px; color: #94a3b8; font-size: 11px; }
-.topbar-logout { margin-left: 4px; }
-@media (max-width: 900px) { .topbar-company { display: none; } }
+.topbar-company span {
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+.topbar-logout {
+  margin-left: 4px;
+}
+@media (max-width: 900px) {
+  .topbar-company {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 78px;
+    padding-inline: 10px;
+  }
+  .sidebar-logo-text,
+  .sidebar-module-info,
+  .sidebar-link span {
+    display: none;
+  }
+  .sidebar-link {
+    justify-content: center;
+    padding: 0;
+  }
+  .app-wrapper {
+    margin-left: 78px;
+  }
+  .topbar-search {
+    width: min(260px, 36vw);
+  }
+  .topbar-company,
+  .user-info {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
+  .app-wrapper {
+    margin-left: 0;
+  }
+  .app-content {
+    padding: 16px;
+  }
+  .topbar {
+    padding: 0 14px;
+  }
+  .topbar-search {
+    display: none;
+  }
+}

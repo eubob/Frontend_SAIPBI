@@ -1,0 +1,29 @@
+.master-toolbar,
+.master-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.master-toolbar {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.master-form {
+  display: grid;
+  gap: 1rem;
+}
+.master-form label {
+  display: grid;
+  gap: 0.4rem;
+}
+.master-form .w-full {
+  width: 100%;
+}
+.master-form .master-actions {
+  justify-content: flex-end;
+}
+.master-error {
+  padding: 1rem;
+  color: #b42318;
+}

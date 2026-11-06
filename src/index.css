@@ -48,3 +48,24 @@ button {
 a {
   color: inherit;
 }
+.route-error {
+  min-height: 70vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem;
+}
+.route-error > span {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #2563eb;
+}
+.route-error h1,
+.route-error p {
+  margin: 0;
+}
+.route-error a {
+  color: #2563eb;
+  font-weight: 700;
+}

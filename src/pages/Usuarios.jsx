@@ -1,561 +1,302 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Search,
-  Plus,
-  Pencil,
-  UserCheck,
-  UserX,
-  X,
-  Save,
-  Users,
-} from "lucide-react";
-
+import { useEffect, useRef, useState } from "react";
+import { FaUserShield } from "react-icons/fa6";
+import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { DataTable } from "primereact/datatable";
+import { Dialog } from "primereact/dialog";
+import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { Tag } from "primereact/tag";
+import { Toast } from "primereact/toast";
 import api from "../services/AxiosInstance";
 import "./Pages.css";
 import "./Usuarios.css";
 
-const formularioInicial = {
-  nome: "",
-  email: "",
-  senha: "",
-  perfil_id: "",
-  ativo: true,
-};
+const vazio = { nome: "", email: "", senha: "", perfil_id: null, ativo: true };
 
-function Usuarios() {
+export default function Usuarios() {
+  const toast = useRef(null);
   const [usuarios, setUsuarios] = useState([]);
   const [perfis, setPerfis] = useState([]);
-
   const [busca, setBusca] = useState("");
-  const [filtroPerfil, setFiltroPerfil] = useState("");
-  const [filtroStatus, setFiltroStatus] = useState("");
-
-  const [carregando, setCarregando] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [salvando, setSalvando] = useState(false);
+  const [dialog, setDialog] = useState(false);
+  const [editando, setEditando] = useState(null);
+  const [form, setForm] = useState(vazio);
 
-  const [erro, setErro] = useState("");
-  const [sucesso, setSucesso] = useState("");
-
-  const [modalAberto, setModalAberto] = useState(false);
-  const [usuarioEditando, setUsuarioEditando] = useState(null);
-
-  const [formulario, setFormulario] = useState(formularioInicial);
-
-  const carregarUsuarios = async () => {
+  async function carregar() {
+    setLoading(true);
     try {
-      setCarregando(true);
-      setErro("");
-
-      const response = await api.get("/usuarios");
-
-      setUsuarios(response.data);
+      const [usuariosResponse, perfisResponse] = await Promise.all([
+        api.get("/usuarios"),
+        api.get("/perfis"),
+      ]);
+      setUsuarios(usuariosResponse.data);
+      setPerfis(perfisResponse.data);
     } catch (error) {
-      setErro(
-        error.response?.data?.mensagem ||
+      toast.current?.show({
+        severity: "error",
+        summary: "Erro",
+        detail:
+          error.response?.data?.mensagem ||
           "Não foi possível carregar os usuários.",
-      );
+      });
     } finally {
-      setCarregando(false);
+      setLoading(false);
     }
-  };
-
-  const carregarPerfis = async () => {
-    try {
-      const response = await api.get("/perfis");
-
-      setPerfis(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar perfis:", error);
-    }
-  };
+  }
 
   useEffect(() => {
-    carregarUsuarios();
-    carregarPerfis();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    carregar();
   }, []);
 
-  const usuariosFiltrados = useMemo(() => {
-    return usuarios.filter((usuario) => {
-      const termo = busca.toLowerCase();
-
-      const correspondeBusca =
-        !termo ||
-        usuario.nome?.toLowerCase().includes(termo) ||
-        usuario.email?.toLowerCase().includes(termo);
-
-      const correspondePerfil =
-        !filtroPerfil || String(usuario.perfil_id) === String(filtroPerfil);
-
-      const correspondeStatus =
-        !filtroStatus || String(usuario.ativo) === filtroStatus;
-
-      return correspondeBusca && correspondePerfil && correspondeStatus;
-    });
-  }, [usuarios, busca, filtroPerfil, filtroStatus]);
-
-  const abrirNovoUsuario = () => {
-    setUsuarioEditando(null);
-    setFormulario(formularioInicial);
-    setErro("");
-    setSucesso("");
-    setModalAberto(true);
-  };
-
-  const abrirEdicao = (usuario) => {
-    setUsuarioEditando(usuario);
-
-    setFormulario({
+  function novo() {
+    setEditando(null);
+    setForm(vazio);
+    setDialog(true);
+  }
+  function editar(usuario) {
+    setEditando(usuario);
+    setForm({
       nome: usuario.nome || "",
       email: usuario.email || "",
       senha: "",
-      perfil_id: usuario.perfil_id || usuario.perfil?.id || "",
+      perfil_id: usuario.perfil_id || usuario.perfil?.id || null,
       ativo: usuario.ativo,
     });
+    setDialog(true);
+  }
 
-    setErro("");
-    setSucesso("");
-    setModalAberto(true);
-  };
-
-  const fecharModal = () => {
-    if (salvando) return;
-
-    setModalAberto(false);
-    setUsuarioEditando(null);
-    setFormulario(formularioInicial);
-  };
-
-  const alterarCampo = (event) => {
-    const { name, value } = event.target;
-
-    setFormulario((anterior) => ({
-      ...anterior,
-      [name]: value,
-    }));
-  };
-
-  const salvarUsuario = async (event) => {
+  async function salvar(event) {
     event.preventDefault();
-
+    setSalvando(true);
     try {
-      setSalvando(true);
-      setErro("");
-      setSucesso("");
-
-      const dados = {
-        nome: formulario.nome.trim(),
-        email: formulario.email.trim(),
-        perfil_id: Number(formulario.perfil_id),
-        ativo: formulario.ativo,
+      const payload = {
+        nome: form.nome.trim(),
+        email: form.email.trim(),
+        perfil_id: Number(form.perfil_id),
+        ativo: form.ativo,
       };
-
-      if (formulario.senha) {
-        dados.senha = formulario.senha;
+      if (form.senha) payload.senha = form.senha;
+      if (editando) await api.put(`/usuarios/${editando.id}`, payload);
+      else {
+        payload.senha = form.senha;
+        await api.post("/usuarios", payload);
       }
-
-      if (!usuarioEditando) {
-        dados.senha = formulario.senha;
-
-        await api.post("/usuarios", dados);
-
-        setSucesso("Usuário cadastrado com sucesso.");
-      } else {
-        await api.put(`/usuarios/${usuarioEditando.id}`, dados);
-
-        setSucesso("Usuário atualizado com sucesso.");
-      }
-
-      await carregarUsuarios();
-
-      setModalAberto(false);
-      setUsuarioEditando(null);
-      setFormulario(formularioInicial);
+      toast.current?.show({
+        severity: "success",
+        summary: "Sucesso",
+        detail: editando ? "Usuário atualizado." : "Usuário cadastrado.",
+      });
+      setDialog(false);
+      await carregar();
     } catch (error) {
-      setErro(
-        error.response?.data?.mensagem || "Não foi possível salvar o usuário.",
-      );
+      toast.current?.show({
+        severity: "error",
+        summary: "Erro",
+        detail:
+          error.response?.data?.mensagem ||
+          "Não foi possível salvar o usuário.",
+      });
     } finally {
       setSalvando(false);
     }
-  };
+  }
 
-  const alterarStatus = async (usuario) => {
+  function confirmarStatus(usuario) {
     const novoStatus = !usuario.ativo;
+    confirmDialog({
+      message: `Deseja ${novoStatus ? "ativar" : "inativar"} ${usuario.nome}?`,
+      header: "Confirmar alteração",
+      icon: "pi pi-exclamation-triangle",
+      acceptLabel: "Confirmar",
+      rejectLabel: "Cancelar",
+      accept: async () => {
+        try {
+          await api.put(`/usuarios/${usuario.id}/status`, {
+            ativo: novoStatus,
+          });
+          await carregar();
+          toast.current?.show({
+            severity: "success",
+            summary: "Status atualizado",
+          });
+        } catch (error) {
+          toast.current?.show({
+            severity: "error",
+            summary: "Erro",
+            detail:
+              error.response?.data?.mensagem ||
+              "Não foi possível alterar o status.",
+          });
+        }
+      },
+    });
+  }
 
-    const acao = novoStatus ? "ativar" : "inativar";
-
-    const confirmar = window.confirm(
-      `Deseja realmente ${acao} o usuário "${usuario.nome}"?`,
-    );
-
-    if (!confirmar) return;
-
-    try {
-      setErro("");
-      setSucesso("");
-
-      await api.put(`/usuarios/${usuario.id}/status`, {
-        ativo: novoStatus,
-      });
-
-      setSucesso(
-        novoStatus
-          ? "Usuário ativado com sucesso."
-          : "Usuário inativado com sucesso.",
-      );
-
-      await carregarUsuarios();
-    } catch (error) {
-      setErro(
-        error.response?.data?.mensagem ||
-          "Não foi possível alterar o status do usuário.",
-      );
-    }
-  };
+  const perfilTemplate = (row) => (
+    <Tag value={row.perfil?.nome || "-"} severity="info" />
+  );
+  const statusTemplate = (row) => (
+    <Tag
+      value={row.ativo ? "Ativo" : "Inativo"}
+      severity={row.ativo ? "success" : "danger"}
+    />
+  );
+  const acoesTemplate = (row) => (
+    <div className="users-actions">
+      <Button
+        icon="pi pi-pencil"
+        rounded
+        text
+        aria-label={`Editar ${row.nome}`}
+        onClick={() => editar(row)}
+      />
+      <Button
+        icon={row.ativo ? "pi pi-user-minus" : "pi pi-user-plus"}
+        rounded
+        text
+        severity={row.ativo ? "danger" : "success"}
+        aria-label={`Alterar status de ${row.nome}`}
+        onClick={() => confirmarStatus(row)}
+      />
+    </div>
+  );
 
   return (
     <div className="system-page">
+      <Toast ref={toast} />
+      <ConfirmDialog />
       <div className="page-header">
         <div>
           <h1>Gestão de Usuários</h1>
-          <p>
-            Cadastre usuários, defina perfis de acesso e controle o status das
-            contas.
-          </p>
+          <p>Administração de contas e perfis da empresa atual.</p>
         </div>
-
-        <button
-          className="primary-button"
-          type="button"
-          onClick={abrirNovoUsuario}
-        >
-          <Plus size={17} />
-          Novo Usuário
-        </button>
+        <Button label="Novo Usuário" icon="pi pi-plus" onClick={novo} />
       </div>
-
-      {erro && <div className="users-message error">{erro}</div>}
-
-      {sucesso && <div className="users-message success">{sucesso}</div>}
-
       <div className="users-summary">
         <div className="users-summary-card">
           <div className="users-summary-icon">
-            <Users size={20} />
+            <FaUserShield />
           </div>
-
           <div>
             <span>Total de usuários</span>
             <strong>{usuarios.length}</strong>
           </div>
         </div>
-
         <div className="users-summary-card">
           <div>
-            <span>Usuários ativos</span>
-            <strong>
-              {usuarios.filter((usuario) => usuario.ativo).length}
-            </strong>
+            <span>Ativos</span>
+            <strong>{usuarios.filter((u) => u.ativo).length}</strong>
           </div>
         </div>
-
         <div className="users-summary-card">
           <div>
-            <span>Usuários inativos</span>
-            <strong>
-              {usuarios.filter((usuario) => !usuario.ativo).length}
-            </strong>
+            <span>Inativos</span>
+            <strong>{usuarios.filter((u) => !u.ativo).length}</strong>
           </div>
         </div>
       </div>
-
       <div className="page-card">
         <div className="table-toolbar">
-          <div className="page-search">
-            <Search size={16} />
-
-            <input
-              type="text"
-              placeholder="Buscar por nome ou e-mail..."
+          <span className="p-input-icon-left">
+            <i className="pi pi-search" />
+            <InputText
               value={busca}
-              onChange={(event) => setBusca(event.target.value)}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Buscar usuários"
+            />
+          </span>
+        </div>
+        <DataTable
+          value={usuarios}
+          loading={loading}
+          paginator
+          rows={10}
+          globalFilter={busca}
+          globalFilterFields={["nome", "email", "perfil.nome"]}
+          emptyMessage="Nenhum usuário encontrado."
+          stripedRows
+        >
+          <Column field="nome" header="Nome" sortable />
+          <Column field="email" header="E-mail" sortable />
+          <Column header="Perfil" body={perfilTemplate} />
+          <Column header="Status" body={statusTemplate} />
+          <Column
+            header="Ações"
+            body={acoesTemplate}
+            style={{ width: "9rem" }}
+          />
+        </DataTable>
+      </div>
+      <Dialog
+        header={editando ? "Editar usuário" : "Novo usuário"}
+        visible={dialog}
+        style={{ width: "min(520px, 92vw)" }}
+        modal
+        onHide={() => !salvando && setDialog(false)}
+      >
+        <form className="users-form" onSubmit={salvar}>
+          <label>
+            Nome
+            <InputText
+              value={form.nome}
+              onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              required
+            />
+          </label>
+          <label>
+            E-mail
+            <InputText
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
+          </label>
+          <label>
+            Perfil
+            <Dropdown
+              value={form.perfil_id}
+              options={perfis}
+              optionLabel="nome"
+              optionValue="id"
+              placeholder="Selecione"
+              onChange={(e) => setForm({ ...form, perfil_id: e.value })}
+              required
+            />
+          </label>
+          <label>
+            {editando ? "Nova senha (opcional)" : "Senha"}
+            <Password
+              value={form.senha}
+              onChange={(e) => setForm({ ...form, senha: e.target.value })}
+              feedback={false}
+              toggleMask
+              required={!editando}
+            />
+          </label>
+          <div className="users-form-actions">
+            <Button
+              type="button"
+              label="Cancelar"
+              severity="secondary"
+              text
+              onClick={() => setDialog(false)}
+            />
+            <Button
+              type="submit"
+              label={salvando ? "Salvando..." : "Salvar"}
+              icon="pi pi-check"
+              loading={salvando}
             />
           </div>
-
-          <div className="toolbar-filters">
-            <select
-              value={filtroPerfil}
-              onChange={(event) => setFiltroPerfil(event.target.value)}
-            >
-              <option value="">Todos os perfis</option>
-
-              {perfis.map((perfil) => (
-                <option key={perfil.id} value={perfil.id}>
-                  {perfil.nome}
-                </option>
-              ))}
-            </select>
-
-            <select
-              value={filtroStatus}
-              onChange={(event) => setFiltroStatus(event.target.value)}
-            >
-              <option value="">Todos os status</option>
-              <option value="true">Ativos</option>
-              <option value="false">Inativos</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="page-table-wrapper">
-          <table className="page-table">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {carregando ? (
-                <tr>
-                  <td colSpan="5" className="users-empty">
-                    Carregando usuários...
-                  </td>
-                </tr>
-              ) : usuariosFiltrados.length === 0 ? (
-                <tr>
-                  <td colSpan="5" className="users-empty">
-                    Nenhum usuário encontrado.
-                  </td>
-                </tr>
-              ) : (
-                usuariosFiltrados.map((usuario) => (
-                  <tr key={usuario.id}>
-                    <td>
-                      <strong>{usuario.nome}</strong>
-                    </td>
-
-                    <td>{usuario.email}</td>
-
-                    <td>
-                      <span className="profile-badge">
-                        {usuario.perfil?.nome || "-"}
-                      </span>
-                    </td>
-
-                    <td>
-                      <span
-                        className={`status-badge ${
-                          usuario.ativo ? "success" : "danger"
-                        }`}
-                      >
-                        {usuario.ativo ? "Ativo" : "Inativo"}
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="users-actions">
-                        <button
-                          className="users-icon-button"
-                          type="button"
-                          title="Editar usuário"
-                          onClick={() => abrirEdicao(usuario)}
-                        >
-                          <Pencil size={15} />
-                        </button>
-
-                        <button
-                          className={`users-icon-button ${
-                            usuario.ativo ? "danger" : "success"
-                          }`}
-                          type="button"
-                          title={
-                            usuario.ativo
-                              ? "Inativar usuário"
-                              : "Ativar usuário"
-                          }
-                          onClick={() => alterarStatus(usuario)}
-                        >
-                          {usuario.ativo ? (
-                            <UserX size={15} />
-                          ) : (
-                            <UserCheck size={15} />
-                          )}
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {modalAberto && (
-        <div
-          className="users-modal-overlay"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              fecharModal();
-            }
-          }}
-        >
-          <div className="users-modal">
-            <div className="users-modal-header">
-              <div>
-                <h2>{usuarioEditando ? "Editar Usuário" : "Novo Usuário"}</h2>
-
-                <p>
-                  {usuarioEditando
-                    ? "Atualize os dados e permissões do usuário."
-                    : "Preencha os dados para cadastrar um novo usuário."}
-                </p>
-              </div>
-
-              <button
-                type="button"
-                className="users-modal-close"
-                onClick={fecharModal}
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <form onSubmit={salvarUsuario}>
-              <div className="users-modal-content">
-                <div className="form-group">
-                  <label htmlFor="nome">Nome</label>
-
-                  <input
-                    id="nome"
-                    name="nome"
-                    type="text"
-                    placeholder="Nome completo"
-                    value={formulario.nome}
-                    onChange={alterarCampo}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">E-mail</label>
-
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="usuario@saipbi.com"
-                    value={formulario.email}
-                    onChange={alterarCampo}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="perfil_id">Perfil de acesso</label>
-
-                  <select
-                    id="perfil_id"
-                    name="perfil_id"
-                    value={formulario.perfil_id}
-                    onChange={alterarCampo}
-                    required
-                  >
-                    <option value="">Selecione um perfil</option>
-
-                    {perfis.map((perfil) => (
-                      <option key={perfil.id} value={perfil.id}>
-                        {perfil.nome}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="senha">
-                    {usuarioEditando ? "Nova senha" : "Senha"}
-                  </label>
-
-                  <input
-                    id="senha"
-                    name="senha"
-                    type="password"
-                    placeholder={
-                      usuarioEditando
-                        ? "Deixe vazio para manter"
-                        : "Digite a senha"
-                    }
-                    value={formulario.senha}
-                    onChange={alterarCampo}
-                    required={!usuarioEditando}
-                    minLength={4}
-                  />
-
-                  {usuarioEditando && (
-                    <small className="users-field-help">
-                      Deixe vazio para manter a senha atual.
-                    </small>
-                  )}
-                </div>
-
-                <div className="users-status-field">
-                  <div>
-                    <strong>Usuário ativo</strong>
-                    <span>Permite acesso ao sistema.</span>
-                  </div>
-
-                  <label className="users-switch">
-                    <input
-                      type="checkbox"
-                      checked={formulario.ativo}
-                      onChange={(event) =>
-                        setFormulario((anterior) => ({
-                          ...anterior,
-                          ativo: event.target.checked,
-                        }))
-                      }
-                    />
-
-                    <span />
-                  </label>
-                </div>
-              </div>
-
-              <div className="users-modal-footer">
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={fecharModal}
-                  disabled={salvando}
-                >
-                  Cancelar
-                </button>
-
-                <button
-                  type="submit"
-                  className="primary-button"
-                  disabled={salvando}
-                >
-                  <Save size={16} />
-
-                  {salvando
-                    ? "Salvando..."
-                    : usuarioEditando
-                      ? "Salvar alterações"
-                      : "Cadastrar usuário"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+        </form>
+      </Dialog>
     </div>
   );
 }
-
-export default Usuarios;

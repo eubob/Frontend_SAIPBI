@@ -347,3 +347,27 @@
     width: 100%;
   }
 }
+
+.users-form {
+  display: grid;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+.users-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: #334155;
+}
+.users-form .p-inputtext,
+.users-form .p-dropdown,
+.users-form .p-password,
+.users-form .p-password-input {
+  width: 100%;
+}
+.users-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}

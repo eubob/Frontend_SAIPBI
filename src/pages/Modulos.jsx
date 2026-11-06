@@ -1,64 +1,27 @@
-import { useNavigate } from 'react-router-dom';
+import { Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { MODULES } from "../config/navigation";
+import { PERMISSIONS } from "../config/permissions";
+import useAuth from "../hooks/useAuth";
+import usePermissions from "../hooks/usePermissions";
+import "./Modulos.css";
 
-import {
-  ShoppingCart,
-  Boxes,
-  WalletCards,
-  UsersRound,
-  ArrowRight,
-  Settings,
-} from 'lucide-react';
-
-import './Modulos.css';
-
-const modulos = [
-  {
-    id: 'comercial',
-    titulo: 'Comercial',
-    descricao:
-      'Gerencie vendas, clientes, vendedores, pedidos e acompanhe os resultados comerciais.',
-    icon: ShoppingCart,
-    path: '/app/comercial',
-    status: 'Disponível',
-  },
-  {
-    id: 'estoque',
-    titulo: 'Estoque',
-    descricao:
-      'Controle produtos, entradas, saídas, inventários, fornecedores e movimentações.',
-    icon: Boxes,
-    path: '/app/estoque',
-    status: 'Disponível',
-  },
-  {
-    id: 'financeiro',
-    titulo: 'Financeiro',
-    descricao:
-      'Acompanhe contas, fluxo de caixa, lançamentos e indicadores financeiros.',
-    icon: WalletCards,
-    path: '/app/financeiro',
-    status: 'Disponível',
-  },
-  {
-    id: 'rh',
-    titulo: 'Recursos Humanos',
-    descricao:
-      'Gerencie colaboradores, departamentos, cargos e indicadores de RH.',
-    icon: UsersRound,
-    path: '/app/rh',
-    status: 'Disponível',
-  },
-];
-
-function Modulos() {
+function iniciais(nome = "") {
+  return (
+    nome
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((p) => p[0])
+      .join("")
+      .toUpperCase() || "US"
+  );
+}
+export default function Modulos() {
   const navigate = useNavigate();
-
-  function acessarModulo(modulo) {
-    if (modulo.disabled) return;
-
-    navigate(modulo.path);
-  }
-
+  const { usuario, perfil } = useAuth();
+  const { can } = usePermissions();
+  const modulos = MODULES.filter((modulo) => can(modulo.permission));
   return (
     <div className="modules-page">
       <header className="modules-header">
@@ -69,113 +32,68 @@ function Modulos() {
             <span />
             <span />
           </div>
-
           <div>
             <strong>SAIPBI</strong>
             <span>Sistema Administrativo Integrado</span>
           </div>
         </div>
-
         <div className="modules-user-area">
           <div className="modules-user">
-            <div className="modules-avatar">
-              HC
-            </div>
-
+            <div className="modules-avatar">{iniciais(usuario?.nome)}</div>
             <div>
-              <strong>Hygor Custodio</strong>
-              <span>Administrador</span>
+              <strong>{usuario?.nome || "Usuário"}</strong>
+              <span>{perfil?.nome || ""}</span>
             </div>
           </div>
-
-          <button
-            className="modules-settings-button"
-            type="button"
-            title="Configurações"
-          >
-            <Settings size={19} />
-          </button>
+          {can(PERMISSIONS.MANAGE_SETTINGS) && (
+            <button
+              className="modules-settings-button"
+              type="button"
+              title="Configurações"
+              onClick={() => navigate("/app/configuracoes")}
+            >
+              <Settings size={19} />
+            </button>
+          )}
         </div>
       </header>
-
       <main className="modules-content">
         <div className="modules-intro">
-          <span className="modules-eyebrow">
-            PAINEL ADMINISTRATIVO
-          </span>
-
+          <span className="modules-eyebrow">PAINEL ADMINISTRATIVO</span>
           <h1>Selecione um módulo</h1>
-
-          <p>
-            Escolha uma área do SAIPBI para acessar suas funcionalidades,
-            indicadores e operações.
-          </p>
+          <p>Escolha uma área disponível para o seu perfil.</p>
         </div>
-
         <div className="modules-grid">
           {modulos.map((modulo) => {
             const Icon = modulo.icon;
-
             return (
               <button
                 key={modulo.id}
-                className={`module-selection-card module-${modulo.id} ${
-                  modulo.disabled ? 'disabled' : ''
-                }`}
+                className={`module-selection-card module-${modulo.id}`}
                 type="button"
-                onClick={() => acessarModulo(modulo)}
-                disabled={modulo.disabled}
+                onClick={() => navigate(modulo.path)}
               >
                 <div className="module-selection-top">
                   <div className="module-selection-icon">
-                    <Icon
-                      size={25}
-                      strokeWidth={1.8}
-                    />
+                    <Icon size={25} />
                   </div>
-
-                  <span
-                    className={`module-status ${
-                      modulo.disabled
-                        ? 'development'
-                        : 'available'
-                    }`}
-                  >
+                  <span className="module-status available">
                     {modulo.status}
                   </span>
                 </div>
-
                 <div className="module-selection-body">
                   <h2>{modulo.titulo}</h2>
                   <p>{modulo.descricao}</p>
                 </div>
-
                 <div className="module-selection-footer">
-                  <span>
-                    {modulo.disabled
-                      ? 'Em breve'
-                      : 'Acessar módulo'}
-                  </span>
-
-                  {!modulo.disabled && (
-                    <ArrowRight size={17} />
-                  )}
+                  <span>Acessar módulo</span>
+                  <i className="pi pi-arrow-right" />
                 </div>
               </button>
             );
           })}
         </div>
-
-        <div className="modules-footer-info">
-          <span>SAIPBI</span>
-          <span className="modules-dot" />
-          <span>
-            Sistema Administrativo Integrado
-          </span>
-        </div>
       </main>
     </div>
   );
 }
-
-export default Modulos;  

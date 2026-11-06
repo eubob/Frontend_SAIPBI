@@ -1,70 +1,71 @@
-import {
-  createBrowserRouter,
-  Navigate,
-} from 'react-router-dom';
+import Categorias from "../pages/Categorias";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import Login from '../components/login';
-import Modulos from '../pages/Modulos';
+import Login from "../components/login";
+import Modulos from "../pages/Modulos";
 
-import Dashboard from '../components/dashboard/Dashboard';
+import Dashboard from "../components/dashboard/Dashboard";
 
 // =========================
 // COMERCIAL
 // =========================
 
-import Vendas from '../pages/Vendas';
-import Vendedores from '../pages/Vendedores';
-import Clientes from '../pages/Clientes';
-import NovaVenda from '../pages/NovaVenda';
-import Pedidos from '../pages/Pedidos';
-import Produtos from '../pages/Produtos';
+import Vendas from "../pages/Vendas";
+import Vendedores from "../pages/Vendedores";
+import Clientes from "../pages/Clientes";
+import NovaVenda from "../pages/NovaVenda";
+import Pedidos from "../pages/Pedidos";
+import Produtos from "../pages/Produtos";
 
-import Relatorios from '../pages/relatorios/Relatorios';
-import VendasPeriodo from '../pages/relatorios/VendasPeriodo';
-import DesempenhoVendedor from '../pages/relatorios/DesempenhoVendedor';
+import Relatorios from "../pages/relatorios/Relatorios";
+import VendasPeriodo from "../pages/relatorios/VendasPeriodo";
+import DesempenhoVendedor from "../pages/relatorios/DesempenhoVendedor";
 
 // =========================
 // ESTOQUE
 // =========================
 
-import DashboardEstoque from '../pages/estoque/DashboardEstoque';
-import ControleEstoque from '../pages/estoque/ControleEstoque';
-import Entradas from '../pages/estoque/Entradas';
-import Saidas from '../pages/estoque/Saidas';
-import Movimentacoes from '../pages/estoque/Movimentacoes';
-import Inventario from '../pages/estoque/Inventario';
-import Fornecedores from '../pages/estoque/Fornecedores';
+import DashboardEstoque from "../pages/estoque/DashboardEstoque";
+import ControleEstoque from "../pages/estoque/ControleEstoque";
+import Entradas from "../pages/estoque/Entradas";
+import Saidas from "../pages/estoque/Saidas";
+import Movimentacoes from "../pages/estoque/Movimentacoes";
+import Inventario from "../pages/estoque/Inventario";
+import Fornecedores from "../pages/estoque/Fornecedores";
 
 // =========================
 // FINANCEIRO
 // =========================
 
-import DashboardFinanceiro from '../pages/financeiro/DashboardFinanceiro';
-import ContasPagar from '../pages/financeiro/ContasPagar';
-import ContasReceber from '../pages/financeiro/ContasReceber';
-import FluxoCaixa from '../pages/financeiro/FluxoCaixa';
-import Lancamentos from '../pages/financeiro/Lancamentos';
-import RelatoriosFinanceiros from '../pages/financeiro/RelatoriosFinanceiros';
+import DashboardFinanceiro from "../pages/financeiro/DashboardFinanceiro";
+import ContasPagar from "../pages/financeiro/ContasPagar";
+import ContasReceber from "../pages/financeiro/ContasReceber";
+import FluxoCaixa from "../pages/financeiro/FluxoCaixa";
+import Lancamentos from "../pages/financeiro/Lancamentos";
+import RelatoriosFinanceiros from "../pages/financeiro/RelatoriosFinanceiros";
 
 // =========================
 // RECURSOS HUMANOS
 // =========================
 
-import DashboardRH from '../pages/rh/DashboardRH';
-import Colaboradores from '../pages/rh/Colaboradores';
-import Departamentos from '../pages/rh/Departamentos';
-import Cargos from '../pages/rh/Cargos';
-import ControlePessoal from '../pages/rh/ControlePessoal';
-import RelatoriosRH from '../pages/rh/RelatoriosRH';
+import DashboardRH from "../pages/rh/DashboardRH";
+import Colaboradores from "../pages/rh/Colaboradores";
+import Departamentos from "../pages/rh/Departamentos";
+import Cargos from "../pages/rh/Cargos";
+import ControlePessoal from "../pages/rh/ControlePessoal";
+import RelatoriosRH from "../pages/rh/RelatoriosRH";
 
 // =========================
 // LAYOUT / SEGURANÇA
 // =========================
 
-import AppLayout from '../components/layout/AppLayout';
-import PrivateRoute from './privateRoute';
-import AdminRoute from './AdminRoute';
-import Parametros from '../pages/configuracoes/Parametros';
+import AppLayout from "../components/layout/AppLayout";
+import PrivateRoute from "./privateRoute";
+import AdminRoute from "./AdminRoute";
+import Parametros from "../pages/configuracoes/Parametros";
+import Usuarios from "../pages/Usuarios";
+import Forbidden from "../pages/errors/Forbidden";
+import NotFound from "../pages/errors/NotFound";
 
 const router = createBrowserRouter([
   // =========================
@@ -72,12 +73,12 @@ const router = createBrowserRouter([
   // =========================
 
   {
-    path: '/',
+    path: "/",
     element: <Navigate to="/login" replace />,
   },
 
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
 
@@ -86,7 +87,7 @@ const router = createBrowserRouter([
   // =========================
 
   {
-    path: '/app',
+    path: "/app",
     element: <PrivateRoute />,
 
     children: [
@@ -112,52 +113,56 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'comercial',
+            path: "comercial",
             element: <Dashboard />,
           },
 
           {
-            path: 'comercial/vendas',
+            path: "comercial/vendas",
             element: <Vendas />,
           },
 
           {
-            path: 'comercial/nova-venda',
+            path: "comercial/nova-venda",
             element: <NovaVenda />,
           },
 
           {
-            path: 'comercial/clientes',
+            path: "comercial/clientes",
             element: <Clientes />,
           },
 
           {
-            path: 'comercial/vendedores',
+            path: "comercial/vendedores",
             element: <Vendedores />,
           },
 
           {
-            path: 'comercial/pedidos',
+            path: "comercial/pedidos",
             element: <Pedidos />,
           },
 
           {
-            path: 'comercial/produtos',
+            path: "comercial/categorias",
+            element: <Categorias />,
+          },
+          {
+            path: "comercial/produtos",
             element: <Produtos />,
           },
 
           {
-            path: 'comercial/relatorios',
+            path: "comercial/relatorios",
             element: <Relatorios />,
           },
 
           {
-            path: 'comercial/relatorios/vendas-periodo',
+            path: "comercial/relatorios/vendas-periodo",
             element: <VendasPeriodo />,
           },
 
           {
-            path: 'comercial/relatorios/desempenho-vendedor',
+            path: "comercial/relatorios/desempenho-vendedor",
             element: <DesempenhoVendedor />,
           },
 
@@ -166,42 +171,42 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'estoque',
+            path: "estoque",
             element: <DashboardEstoque />,
           },
 
           {
-            path: 'estoque/produtos',
+            path: "estoque/produtos",
             element: <Produtos />,
           },
 
           {
-            path: 'estoque/controle',
+            path: "estoque/controle",
             element: <ControleEstoque />,
           },
 
           {
-            path: 'estoque/entradas',
+            path: "estoque/entradas",
             element: <Entradas />,
           },
 
           {
-            path: 'estoque/saidas',
+            path: "estoque/saidas",
             element: <Saidas />,
           },
 
           {
-            path: 'estoque/movimentacoes',
+            path: "estoque/movimentacoes",
             element: <Movimentacoes />,
           },
 
           {
-            path: 'estoque/inventario',
+            path: "estoque/inventario",
             element: <Inventario />,
           },
 
           {
-            path: 'estoque/fornecedores',
+            path: "estoque/fornecedores",
             element: <Fornecedores />,
           },
 
@@ -210,32 +215,32 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'financeiro',
+            path: "financeiro",
             element: <DashboardFinanceiro />,
           },
 
           {
-            path: 'financeiro/contas-pagar',
+            path: "financeiro/contas-pagar",
             element: <ContasPagar />,
           },
 
           {
-            path: 'financeiro/contas-receber',
+            path: "financeiro/contas-receber",
             element: <ContasReceber />,
           },
 
           {
-            path: 'financeiro/fluxo-caixa',
+            path: "financeiro/fluxo-caixa",
             element: <FluxoCaixa />,
           },
 
           {
-            path: 'financeiro/lancamentos',
+            path: "financeiro/lancamentos",
             element: <Lancamentos />,
           },
 
           {
-            path: 'financeiro/relatorios',
+            path: "financeiro/relatorios",
             element: <RelatoriosFinanceiros />,
           },
 
@@ -244,32 +249,32 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'rh',
+            path: "rh",
             element: <DashboardRH />,
           },
 
           {
-            path: 'rh/colaboradores',
+            path: "rh/colaboradores",
             element: <Colaboradores />,
           },
 
           {
-            path: 'rh/departamentos',
+            path: "rh/departamentos",
             element: <Departamentos />,
           },
 
           {
-            path: 'rh/cargos',
+            path: "rh/cargos",
             element: <Cargos />,
           },
 
           {
-            path: 'rh/controle-pessoal',
+            path: "rh/controle-pessoal",
             element: <ControlePessoal />,
           },
 
           {
-            path: 'rh/relatorios',
+            path: "rh/relatorios",
             element: <RelatoriosRH />,
           },
 
@@ -280,12 +285,11 @@ const router = createBrowserRouter([
           {
             element: <AdminRoute />,
             children: [
-              {
-                path: 'configuracoes',
-                element: <Parametros />,
-              },
+              { path: "usuarios", element: <Usuarios /> },
+              { path: "configuracoes", element: <Parametros /> },
             ],
           },
+          { path: "403", element: <Forbidden /> },
 
           // =========================
           // ROTAS ANTIGAS
@@ -293,87 +297,49 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'vendas',
+            path: "vendas",
+            element: <Navigate to="/app/comercial/vendas" replace />,
+          },
+
+          {
+            path: "clientes",
+            element: <Navigate to="/app/comercial/clientes" replace />,
+          },
+
+          {
+            path: "vendedores",
+            element: <Navigate to="/app/comercial/vendedores" replace />,
+          },
+
+          {
+            path: "nova-venda",
+            element: <Navigate to="/app/comercial/nova-venda" replace />,
+          },
+
+          {
+            path: "pedidos",
+            element: <Navigate to="/app/comercial/pedidos" replace />,
+          },
+
+          {
+            path: "produtos",
+            element: <Navigate to="/app/comercial/produtos" replace />,
+          },
+
+          {
+            path: "relatorios",
+            element: <Navigate to="/app/comercial/relatorios" replace />,
+          },
+
+          {
+            path: "vendas-periodo",
             element: (
-              <Navigate
-                to="/app/comercial/vendas"
-                replace
-              />
+              <Navigate to="/app/comercial/relatorios/vendas-periodo" replace />
             ),
           },
 
           {
-            path: 'clientes',
-            element: (
-              <Navigate
-                to="/app/comercial/clientes"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'vendedores',
-            element: (
-              <Navigate
-                to="/app/comercial/vendedores"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'nova-venda',
-            element: (
-              <Navigate
-                to="/app/comercial/nova-venda"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'pedidos',
-            element: (
-              <Navigate
-                to="/app/comercial/pedidos"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'produtos',
-            element: (
-              <Navigate
-                to="/app/comercial/produtos"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'relatorios',
-            element: (
-              <Navigate
-                to="/app/comercial/relatorios"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'vendas-periodo',
-            element: (
-              <Navigate
-                to="/app/comercial/relatorios/vendas-periodo"
-                replace
-              />
-            ),
-          },
-
-          {
-            path: 'desempenho-vendedor',
+            path: "desempenho-vendedor",
             element: (
               <Navigate
                 to="/app/comercial/relatorios/desempenho-vendedor"
@@ -388,63 +354,33 @@ const router = createBrowserRouter([
           // =========================
 
           {
-            path: 'controle-estoque',
-            element: (
-              <Navigate
-                to="/app/estoque/controle"
-                replace
-              />
-            ),
+            path: "controle-estoque",
+            element: <Navigate to="/app/estoque/controle" replace />,
           },
 
           {
-            path: 'entradas',
-            element: (
-              <Navigate
-                to="/app/estoque/entradas"
-                replace
-              />
-            ),
+            path: "entradas",
+            element: <Navigate to="/app/estoque/entradas" replace />,
           },
 
           {
-            path: 'saidas',
-            element: (
-              <Navigate
-                to="/app/estoque/saidas"
-                replace
-              />
-            ),
+            path: "saidas",
+            element: <Navigate to="/app/estoque/saidas" replace />,
           },
 
           {
-            path: 'movimentacoes',
-            element: (
-              <Navigate
-                to="/app/estoque/movimentacoes"
-                replace
-              />
-            ),
+            path: "movimentacoes",
+            element: <Navigate to="/app/estoque/movimentacoes" replace />,
           },
 
           {
-            path: 'inventario',
-            element: (
-              <Navigate
-                to="/app/estoque/inventario"
-                replace
-              />
-            ),
+            path: "inventario",
+            element: <Navigate to="/app/estoque/inventario" replace />,
           },
 
           {
-            path: 'fornecedores',
-            element: (
-              <Navigate
-                to="/app/estoque/fornecedores"
-                replace
-              />
-            ),
+            path: "fornecedores",
+            element: <Navigate to="/app/estoque/fornecedores" replace />,
           },
         ],
       },
@@ -455,10 +391,7 @@ const router = createBrowserRouter([
   // ROTA NÃO ENCONTRADA
   // =========================
 
-  {
-    path: '*',
-    element: <Navigate to="/login" replace />,
-  },
+  { path: "*", element: <NotFound /> },
 ]);
 
-export default router;  
+export default router;

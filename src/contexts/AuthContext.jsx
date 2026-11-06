@@ -1,16 +1,10 @@
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import authService from '../services/authService';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import authService from "../services/authService";
 
-export const AuthContext = createContext(null);
+import { AuthContext } from "./auth-context";
 
 function getToken() {
-  return localStorage.getItem('token') || sessionStorage.getItem('token');
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
 }
 
 export function AuthProvider({ children }) {
@@ -20,8 +14,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const limparSessao = useCallback(() => {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setUsuario(null);
     setPerfil(null);
     setEmpresa(null);
@@ -59,18 +53,21 @@ export function AuthProvider({ children }) {
     carregarSessao();
   }, [carregarSessao]);
 
-  const value = useMemo(() => ({
-    usuario,
-    perfil,
-    empresa,
-    loading,
-    authenticated: Boolean(usuario && perfil && empresa),
-    isAdministrador: perfil?.nome === 'Administrador',
-    isGestor: perfil?.nome === 'Gestor',
-    isOperador: perfil?.nome === 'Operador',
-    carregarSessao,
-    logout,
-  }), [usuario, perfil, empresa, loading, carregarSessao, logout]);
+  const value = useMemo(
+    () => ({
+      usuario,
+      perfil,
+      empresa,
+      loading,
+      authenticated: Boolean(usuario && perfil && empresa),
+      isAdministrador: perfil?.nome === "Administrador",
+      isGestor: perfil?.nome === "Gestor",
+      isOperador: perfil?.nome === "Operador",
+      carregarSessao,
+      logout,
+    }),
+    [usuario, perfil, empresa, loading, carregarSessao, logout],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
