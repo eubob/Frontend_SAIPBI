@@ -1,0 +1,15 @@
+.relatorio-ia { margin: 0 0 16px; padding: 20px; }
+.relatorio-ia-header h2 { font-size: 17px; color: #172033; margin: 0 0 5px; }
+.relatorio-ia-header p { font-size: 12px; color: #64748b; margin: 0; }
+.relatorio-ia-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-top: 16px; }
+.relatorio-ia-controls label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: #475569; }
+.relatorio-ia-controls input { padding: 9px; border: 1px solid #cbd5e1; border-radius: 7px; }
+.relatorio-ia-controls button { padding: 10px 16px; border: 0; border-radius: 7px; background: #1769e8; color: white; cursor: pointer; }
+.relatorio-ia-controls button:disabled { opacity: .55; cursor: not-allowed; }
+.relatorio-ia-error { color: #b91c1c; }
+.relatorio-ia-result { margin-top: 16px; padding: 14px; border-radius: 8px; background: #f8fafc; }
+.relatorio-ia-result pre { font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.7; }
+.relatorio-ia-result small { color: #64748b; }
+.relatorio-ia-result h3 { margin: 18px 0 8px; font-size: 14px; }
+.relatorio-ia-result ul { margin: 8px 0 12px; padding-left: 22px; }
+.relatorio-ia-result li { margin: 6px 0; line-height: 1.5; }

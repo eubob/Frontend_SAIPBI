@@ -24,6 +24,7 @@ import {
 } from 'recharts';
 
 import './Dashboard.css';
+import RelatorioIA from "./RelatorioIA";
 
 const faturamento = [
   { dia: '01/10', valor: 1200 },
@@ -152,6 +153,10 @@ function Dashboard() {
           <h1>Dashboard</h1>
           <p>Visão geral do desempenho comercial da sua empresa.</p>
         </div>
+
+        <section className="dashboard-ai-section">
+          <RelatorioIA />
+        </section>
 
         <div className="dashboard-period">
           <CalendarDays size={15} />
